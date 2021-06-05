@@ -4,6 +4,7 @@ package com.charles.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
@@ -13,8 +14,8 @@ import org.springframework.stereotype.Controller;
  * @author Charles
  * @since 2021-06-04
  */
-@Controller
-@RequestMapping("/user")
+@RestController
+@RequestMapping("sys/user")
 public class UserController extends BaseController {
 
 }

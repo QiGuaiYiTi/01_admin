@@ -1,9 +1,12 @@
 package com.charles.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -21,8 +24,9 @@ public class Menu extends BaseEntity {
     /**
      * 父菜单ID，一级菜单为0
      */
+    @NotNull(message = "上级菜单不能为空")
     private Long parentId;
-
+    @NotBlank(message = "菜单名称不能为空")
     private String name;
 
     /**
@@ -33,6 +37,7 @@ public class Menu extends BaseEntity {
     /**
      * 授权(多个用逗号分隔，如：user:list,user:create)
      */
+    @NotBlank(message = "菜单授权码不能为空")
     private String perms;
 
     private String component;
@@ -40,6 +45,7 @@ public class Menu extends BaseEntity {
     /**
      * 类型     0：目录   1：菜单   2：按钮
      */
+    @NotNull(message = "菜单类型不能为空")
     private Integer type;
 
     /**
@@ -51,9 +57,17 @@ public class Menu extends BaseEntity {
      * 排序
      */
     @TableField("orderNum")
-    private Integer ordernum;
+    private Integer orderNum;
 
+    @TableField(exist = false)
+    private List<Menu> children = new ArrayList<>();
 
+    public List<Menu> getChildren() {
+        return children;
+    }
+    public void setChildren(List<Menu> children) {
+        this.children = children;
+    }
     public Long getParentId() {
         return parentId;
     }
@@ -110,13 +124,14 @@ public class Menu extends BaseEntity {
         this.icon = icon;
     }
 
-    public Integer getOrdernum() {
-        return ordernum;
+    public Integer getOrderNum() {
+        return orderNum;
     }
 
-    public void setOrdernum(Integer ordernum) {
-        this.ordernum = ordernum;
+    public void setOrderNum(Integer orderNum) {
+        this.orderNum = orderNum;
     }
+
 
     @Override
     public String toString() {
@@ -128,7 +143,7 @@ public class Menu extends BaseEntity {
         ", component=" + component +
         ", type=" + type +
         ", icon=" + icon +
-        ", ordernum=" + ordernum +
+        ", orderNum=" + orderNum +
         "}";
     }
 }

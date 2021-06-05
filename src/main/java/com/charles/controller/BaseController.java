@@ -1,5 +1,8 @@
 package com.charles.controller;
 
+import com.charles.service.MenuService;
+import com.charles.service.RoleService;
+import com.charles.service.UserService;
 import com.charles.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,5 +20,11 @@ public class BaseController {
     HttpServletRequest req;
     @Autowired
     RedisUtil redisUtil;
+    @Autowired
+    UserService userService;
+    @Autowired
+    RoleService roleService;
+    @Autowired
+    MenuService menuService;
 
 }

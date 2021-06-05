@@ -25,5 +25,10 @@ public interface UserMapper extends BaseMapper<User> {
      */
     List<Long> getNavMenuIds(Long userId);
 
+    /**
+     * 根据菜单id获取拥有该菜单权限的用户集合
+     * @param menuId
+     * @return
+     */
     List<User> listByMenuId(Long menuId);
 }
