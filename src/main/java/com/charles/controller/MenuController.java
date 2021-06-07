@@ -33,7 +33,7 @@ import java.util.List;
  * @since 2021-06-04
  */
 @Controller
-@RequestMapping("sys/menu")
+@RequestMapping("/sys/menu")
 @Api(tags = "菜单模块相关接口")
 public class MenuController extends BaseController {
 

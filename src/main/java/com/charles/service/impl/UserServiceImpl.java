@@ -52,7 +52,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             //获取角色列表
             List<Role> roles = roleService.list(
                     new QueryWrapper<Role>()
-                            .inSql("id", "SELECT role_id FROM sys_user_role WHERE user_id = #{user_id}"));
+                            .inSql("id", "SELECT role_id FROM sys_user_role WHERE user_id = "+userId));
             if (roles.size() > 0) {
                 String roleCodes = roles.stream().map(r -> "ROLE_" + r.getCode()).collect(Collectors.joining(","));
                 authority = roleCodes.concat(",");

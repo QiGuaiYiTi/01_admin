@@ -38,7 +38,7 @@
         ON t1.role_id=t2.role_id
         JOIN sys_user t3
         ON t2.role_id=t3.id
-        WHERE t1.menu_id=#{menu_id}
+        WHERE t1.menu_id=#{menuId}
     </select>
 
 </mapper>

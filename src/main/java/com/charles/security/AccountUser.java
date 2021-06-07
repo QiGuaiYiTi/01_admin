@@ -1,32 +1,55 @@
-package com.charles.entity;
+package com.charles.security;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.util.Assert;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Description :
  *
  * @author : Charles
- * @created : 2021/6/4
+ * @created : 2021/6/6
  */
 @Data
-@AllArgsConstructor
 public class AccountUser implements UserDetails {
+    private Long userId;
 
     private String password;
+
     private final String username;
-    private final Collection<GrantedAuthority> authorities;
+
+    private final Collection<? extends GrantedAuthority> authorities;
+
     private final boolean accountNonExpired;
+
     private final boolean accountNonLocked;
+
     private final boolean credentialsNonExpired;
+
     private final boolean enabled;
+
+    public AccountUser(Long userId, String username, String password, Collection<? extends GrantedAuthority> authorities) {
+        this(userId, username, password, true, true, true, true, authorities);
+    }
+
+
+    public AccountUser(Long userId, String username, String password, boolean enabled, boolean accountNonExpired,
+                       boolean credentialsNonExpired, boolean accountNonLocked,
+                       Collection<? extends GrantedAuthority> authorities) {
+        Assert.isTrue(username != null && !"".equals(username) && password != null,
+                "Cannot pass null or empty values to constructor");
+        this.userId = userId;
+        this.username = username;
+        this.password = password;
+        this.enabled = enabled;
+        this.accountNonExpired = accountNonExpired;
+        this.credentialsNonExpired = credentialsNonExpired;
+        this.accountNonLocked = accountNonLocked;
+        this.authorities = authorities;
+    }
 
 
     @Override
@@ -63,4 +86,5 @@ public class AccountUser implements UserDetails {
     public boolean isEnabled() {
         return this.enabled;
     }
+
 }

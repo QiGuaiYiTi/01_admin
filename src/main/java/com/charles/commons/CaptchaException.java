@@ -11,7 +11,8 @@ import javax.servlet.ServletException;
  * @created : 2021/6/4
  */
 public class CaptchaException extends AuthenticationException {
-    public CaptchaException(String message) {
-        super(message);
+
+    public CaptchaException(String msg) {
+        super(msg);
     }
 }

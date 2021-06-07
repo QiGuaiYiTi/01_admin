@@ -1,9 +1,6 @@
 package com.charles.security;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.conditions.query.QueryChainWrapper;
-import com.charles.dao.UserMapper;
-import com.charles.entity.AccountUser;
 import com.charles.entity.User;
 import com.charles.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,14 +40,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         //获取密码
         String password = user.getPassword();
         //返回认证对象
-        UserDetails accountUser = new AccountUser(user.getUsername(),
-                 passwordEncoder.encode(user.getPassword()),
-                 this.getUserAuthority(user.getId()),
-                true,
-                true,
-                true,
-                true);
-        return accountUser;
+        return new AccountUser(user.getId(), user.getUsername(), user.getPassword(), getUserAuthority(user.getId()));
     }
     /**
      * 获取用户权限信息（角色、菜单权限）

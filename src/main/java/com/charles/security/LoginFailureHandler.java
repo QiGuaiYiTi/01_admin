@@ -24,7 +24,7 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
                                         HttpServletResponse response,
                                         AuthenticationException e) throws IOException, ServletException {
         //登录失败，返回异常信息
-        Result failInfo = Result.fail("用户名或者密码错误");
+        Result failInfo = Result.fail(e.getMessage());
         response.setContentType("application/json;charset=utf-8");
         response.getOutputStream().write(JSONUtil.toJsonStr(failInfo).getBytes("utf-8"));
         response.getOutputStream().flush();
